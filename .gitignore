@@ -1,0 +1,11 @@
+# Local environment
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Assignment brief
+*.pdf
+
+# Test data is downloaded during setup, not committed
+test_data/

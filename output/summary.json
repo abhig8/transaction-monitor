@@ -1,0 +1,145 @@
+{
+  "inputs": {
+    "transactions": "test_data/transactions.csv",
+    "labels": "test_data/confirmed_fraud.csv"
+  },
+  "ingest": {
+    "rows_read": 1001000,
+    "exact_duplicates_dropped": 1000,
+    "rejected_unparseable_timestamp": 20,
+    "rejected_missing_or_invalid_amount": 15,
+    "rows_in_rejects_file": 1035,
+    "usable_rows": 999965,
+    "blank_merchant_kept": 15,
+    "refunds_kept": 10,
+    "distinct_merchant_names": 134581,
+    "distinct_merchants_after_normalizing": 74
+  },
+  "flags": {
+    "transactions_flagged": 714,
+    "flag_rate_pct": 0.0714,
+    "review_budget": 1000,
+    "flags_per_rule": {
+      "DEVICE_NEW_TO_MULTIPLE_ACCOUNTS": 423,
+      "LARGE_PURCHASE_ON_NEW_DEVICE": 476,
+      "CARD_TESTING_BURST": 55
+    },
+    "flagged_by_more_than_one_rule": 240
+  },
+  "reason_codes": {
+    "DEVICE_NEW_TO_MULTIPLE_ACCOUNTS": {
+      "label": "Device new to multiple accounts",
+      "description": "A device that recently appeared on this account is also being used by other accounts that had never used it before."
+    },
+    "LARGE_PURCHASE_ON_NEW_DEVICE": {
+      "label": "Large purchase on new device",
+      "description": "A purchase more than 3x the account's usual amount, made within 24 hours of a new device appearing."
+    },
+    "CARD_TESTING_BURST": {
+      "label": "Card-testing burst",
+      "description": "A rapid run of small charges at many different merchants, the usual way a stolen card is tested."
+    }
+  },
+  "evaluation": {
+    "labels_in_file": 190,
+    "labels_found_in_transactions": 190,
+    "overall": {
+      "flags": 714,
+      "flag_rate_pct": 0.0714,
+      "flags_that_are_labeled": 37,
+      "labeled_txns": 190,
+      "labeled_txns_flagged": 37,
+      "labeled_txns_covered": 190,
+      "labeled_accounts": 79,
+      "labeled_accounts_covered": 79,
+      "labeled_dollars": 32021.55,
+      "labeled_dollars_covered": 32021.55
+    },
+    "by_rule": {
+      "CARD_TESTING_BURST": {
+        "flags": 55,
+        "flag_rate_pct": 0.0055,
+        "flags_that_are_labeled": 5,
+        "labeled_txns": 190,
+        "labeled_txns_flagged": 5,
+        "labeled_txns_covered": 158,
+        "labeled_accounts": 79,
+        "labeled_accounts_covered": 53,
+        "labeled_dollars": 32021.55,
+        "labeled_dollars_covered": 425.67
+      },
+      "DEVICE_NEW_TO_MULTIPLE_ACCOUNTS": {
+        "flags": 423,
+        "flag_rate_pct": 0.0423,
+        "flags_that_are_labeled": 0,
+        "labeled_txns": 190,
+        "labeled_txns_flagged": 0,
+        "labeled_txns_covered": 0,
+        "labeled_accounts": 79,
+        "labeled_accounts_covered": 0,
+        "labeled_dollars": 32021.55,
+        "labeled_dollars_covered": 0.0
+      },
+      "LARGE_PURCHASE_ON_NEW_DEVICE": {
+        "flags": 476,
+        "flag_rate_pct": 0.0476,
+        "flags_that_are_labeled": 32,
+        "labeled_txns": 190,
+        "labeled_txns_flagged": 32,
+        "labeled_txns_covered": 32,
+        "labeled_accounts": 79,
+        "labeled_accounts_covered": 26,
+        "labeled_dollars": 32021.55,
+        "labeled_dollars_covered": 31595.88
+      }
+    },
+    "time_split": {
+      "split_at": "2026-06-17",
+      "first_half": {
+        "flags": 188,
+        "flag_rate_pct": 0.0373,
+        "flags_that_are_labeled": 2,
+        "labeled_txns": 73,
+        "labeled_txns_flagged": 2,
+        "labeled_txns_covered": 73,
+        "labeled_accounts": 27,
+        "labeled_accounts_covered": 27,
+        "labeled_dollars": 192.28,
+        "labeled_dollars_covered": 192.28,
+        "card_testing_bursts_flagged": 29,
+        "largest_non_qualifying_run": {
+          "charges": 9,
+          "merchants": 8
+        }
+      },
+      "second_half": {
+        "flags": 526,
+        "flag_rate_pct": 0.106,
+        "flags_that_are_labeled": 35,
+        "labeled_txns": 117,
+        "labeled_txns_flagged": 35,
+        "labeled_txns_covered": 117,
+        "labeled_accounts": 52,
+        "labeled_accounts_covered": 52,
+        "labeled_dollars": 31829.27,
+        "labeled_dollars_covered": 31829.27,
+        "card_testing_bursts_flagged": 26,
+        "largest_non_qualifying_run": {
+          "charges": 8,
+          "merchants": 8
+        }
+      }
+    }
+  },
+  "timings_seconds": {
+    "ingest": 3.592,
+    "device_pairings": 0.057,
+    "rule DEVICE_NEW_TO_MULTIPLE_ACCOUNTS": 0.091,
+    "rule LARGE_PURCHASE_ON_NEW_DEVICE": 0.177,
+    "rule CARD_TESTING_BURST": 0.044,
+    "combine_flags": 0.169,
+    "write_outputs": 0.007,
+    "pipeline_total": 4.137,
+    "evaluate": 0.092
+  }
+}
